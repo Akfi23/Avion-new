@@ -8,8 +8,8 @@ namespace Kuhpik
     public class GameStateInstaller : Installer
     {
         [SerializeField] bool useArray;
-        [SerializeField] [HideIf("useArray")] GameStateID firstGameState;
-        [SerializeField] [ShowIf("useArray")] GameStateID[] gameStatesOrder;
+        [SerializeField] [HideIf("useArray")][EnumFlags] GameStateID firstGameState;
+        [SerializeField] [ShowIf("useArray")][EnumFlags] GameStateID[] gameStatesOrder;
 
         public override int Order => 1;
 

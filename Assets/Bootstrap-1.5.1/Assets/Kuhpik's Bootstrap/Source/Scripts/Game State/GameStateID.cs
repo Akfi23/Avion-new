@@ -1,4 +1,6 @@
-﻿namespace Kuhpik
+﻿using NaughtyAttributes;
+
+namespace Kuhpik
 {
     public enum GameStateID
     {

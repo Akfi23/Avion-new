@@ -7,10 +7,10 @@ namespace Kuhpik
 {
     public class GameStateComponent : MonoBehaviour
     {
-        [SerializeField] GameStateID id;
+        [SerializeField][EnumFlags] GameStateID id;
         [SerializeField] bool useAdditionalStates;
-        [SerializeField] [ReorderableList] [ShowIf("useAdditionalStates")] GameStateID[] additionalStatesInTheBegining;
-        [SerializeField] [ReorderableList] [ShowIf("useAdditionalStates")] GameStateID[] additionalStatesInTheEnd;
+        [SerializeField] [ReorderableList] [ShowIf("useAdditionalStates")][EnumFlags] GameStateID[] additionalStatesInTheBegining;
+        [SerializeField] [ReorderableList] [ShowIf("useAdditionalStates")][EnumFlags] GameStateID[] additionalStatesInTheEnd;
 
         [Header("DEBUG")]
         [SerializeField, ReadOnly] List<string> systemNames;

@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using _Source.Code.Components;
+using Kuhpik;
 using UnityEngine;
 
-public class LoadingSystem : MonoBehaviour
+namespace _Source.Code.Systems
 {
-    // Start is called before the first frame update
-    void Start()
+    public class LoadingSystem : GameSystem
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void OnInit()
+        {
+            game.Airplane = FindObjectOfType<AirplaneComponent>();
+        }
     }
 }

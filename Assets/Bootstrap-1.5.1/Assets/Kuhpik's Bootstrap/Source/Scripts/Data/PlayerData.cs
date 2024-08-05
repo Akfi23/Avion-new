@@ -12,8 +12,10 @@ namespace Kuhpik
     [Serializable]
     public class PlayerData
     {
-        // Example (I use public fields for data, but u free to use properties\methods etc)
-        // [BoxGroup("level")] public int level;
-        // [BoxGroup("currency")] public int money;
+        public int Health;
+        public int Money;
+        public int XP;
+        public bool HaveRadar;
+        public bool HaveBody;
     }
 }

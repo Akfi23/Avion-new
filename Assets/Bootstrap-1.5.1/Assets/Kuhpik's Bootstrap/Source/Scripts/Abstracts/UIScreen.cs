@@ -9,7 +9,7 @@ namespace Kuhpik
         [SerializeField] [BoxGroup("Settings")] bool shouldOpenWithState;
         [SerializeField] [BoxGroup("Settings")] bool getScreenFromChild = true;
         [SerializeField] [BoxGroup("Settings")] [HideIf("getScreenFromChild")] GameObject screen;
-        [SerializeField] [BoxGroup("Settings")] [ShowIf("shouldOpenWithState")] GameStateID[] statesToOpenWith;
+        [SerializeField] [BoxGroup("Settings")] [ShowIf("shouldOpenWithState")][EnumFlags] GameStateID[] statesToOpenWith;
 
         //You will get the idea once you use it
         [SerializeField] [BoxGroup("Elements")] bool hideElementsOnOpen;
