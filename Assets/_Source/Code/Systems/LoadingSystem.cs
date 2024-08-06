@@ -9,6 +9,7 @@ namespace _Source.Code.Systems
         public override void OnInit()
         {
             game.Airplane = FindObjectOfType<AirplaneComponent>();
+            game.MainCamera = Camera.main;
         }
     }
 }

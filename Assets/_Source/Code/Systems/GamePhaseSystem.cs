@@ -16,6 +16,8 @@ namespace _Source.Code.Systems
 
         private void ChangeGameState(Transform parent, Transform other)
         {
+            if(!other.TryGetComponent(out ZoneBorderComponent zoneBorder)) return;
+            
             game.CurrentPhase = game.Airplane.transform.position.y > other.transform.position.y
                 ? GamePhase.MainGame : GamePhase.SafeZone;
             

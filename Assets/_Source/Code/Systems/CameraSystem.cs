@@ -10,19 +10,18 @@ namespace _Source.Code.Systems
         [SerializeField] private Vector3 offset;
         [SerializeField] private Vector3 mainGameOffset;
         [SerializeField] private float cameraSpeed;
-        private Camera _camera;
         
         public override void OnInit()
         {
-            _camera = Camera.main;
             Supyrb.Signals.Get<OnGamePhaseChangeSignal>().AddListener(SetMainGameCameraPos);
+            Supyrb.Signals.Get<OnDamageEarnSignal>().AddListener(ShakeCamera);
         }
 
         public override void OnLateUpdate()
         {
             if(game.CurrentPhase==GamePhase.MainGame) return;
             
-            _camera.transform.position =  Vector3.Lerp(_camera.transform.position, game.Airplane.transform.position + offset,
+            game.MainCamera.transform.position =  Vector3.Lerp(game.MainCamera.transform.position, game.Airplane.transform.position + offset,
                 Time.deltaTime * cameraSpeed);
         }
 
@@ -30,7 +29,12 @@ namespace _Source.Code.Systems
         {
             if(phase == GamePhase.SafeZone) return;
             
-            _camera.transform.DOMove(game.Airplane.transform.position + mainGameOffset, 1f);
+            game.MainCamera.transform.DOMove(game.Airplane.transform.position + mainGameOffset, 1f);
+        }
+
+        private void ShakeCamera()
+        {
+            game.MainCamera.DOShakePosition(0.1f, (Vector3.right + Vector3.up)*0.25f);
         }
     }
 }

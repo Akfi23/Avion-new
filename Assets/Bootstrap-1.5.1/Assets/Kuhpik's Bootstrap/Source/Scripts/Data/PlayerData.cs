@@ -12,9 +12,10 @@ namespace Kuhpik
     [Serializable]
     public class PlayerData
     {
-        public int Health;
+        public int Health=3;
         public int Money;
-        public int XP;
+        public float XP;
+        public float Distance;
         public bool HaveRadar;
         public bool HaveBody;
     }
