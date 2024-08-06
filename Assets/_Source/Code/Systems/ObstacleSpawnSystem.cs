@@ -12,7 +12,6 @@ namespace _Source.Code.Systems
         [SerializeField] private ObstacleComponent[] obstaclePrefabs;
 
         private float _timer;
-        private bool _isRun;
         private int _count;
         private ObstacleComponent _obstacle;
 
@@ -23,7 +22,7 @@ namespace _Source.Code.Systems
 
         public override void OnUpdate()
         {
-            if(!_isRun) return;
+            if(game.CurrentPhase==GamePhase.SafeZone) return;
 
             _timer -= Time.deltaTime;
             
@@ -40,11 +39,25 @@ namespace _Source.Code.Systems
             }
             else
             {
+                int posIndex = Random.Range(0, spawnBounds.Length);
+                
                 for (int i = 0; i < _count; i++)
                 {
-                    _obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
-                        new Vector3(8, spawnBounds[Random.Range(0, spawnBounds.Length)], 0),Quaternion.identity);
+                    if (i != 0)
+                    {
+                        int newPosIndex = Random.Range(0, spawnBounds.Length);
+
+                        while (posIndex == newPosIndex)
+                        {
+                            newPosIndex = Random.Range(0, spawnBounds.Length);
+                        }
+
+                        posIndex = newPosIndex;
+                    }
                     
+                    _obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
+                        new Vector3(8, spawnBounds[posIndex], 0),Quaternion.identity);
+
                     game.Obstacles.Add(_obstacle);
                 }
             }
@@ -56,12 +69,7 @@ namespace _Source.Code.Systems
         {
             if (game.CurrentPhase == GamePhase.MainGame)
             {
-                _timer = Random.Range(timerBounds.x,timerBounds.y);
-                _isRun = true;
-            }
-            else
-            {
-                _isRun = false;
+                _timer = Random.Range(0.25f,1f);
             }
         }
     }

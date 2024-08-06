@@ -10,7 +10,9 @@ namespace _Source.Code.Systems
     {
         public float distanceMultiplier;
         public float xpPerDistance;
+        
         private float _tempDistance;
+        
         public override void OnInit()
         {
             Supyrb.Signals.Get<OnGamePhaseChangeSignal>().AddListener(OnGamePhaseChange);
@@ -21,6 +23,7 @@ namespace _Source.Code.Systems
         public override void OnUpdate()
         {
             if(game.CurrentPhase==GamePhase.SafeZone) return;
+            if(game.Airplane.RB.bodyType != RigidbodyType2D.Kinematic) return;
             
             player.Distance += Time.deltaTime * distanceMultiplier;
             screen.DistanceCounterText.SetText(player.Distance.ToString("0.00") + " Miles");

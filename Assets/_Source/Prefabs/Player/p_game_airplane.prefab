@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4033335155592097368}
   - component: {fileID: -8907807512733905895}
   - component: {fileID: 127757362}
-  - component: {fileID: 127757361}
   - component: {fileID: 4342678857669002044}
+  - component: {fileID: 127757361}
   m_Layer: 0
   m_Name: p_game_airplane
   m_TagString: Untagged
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971323ebf7a975240865e2f9b5cc33b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RB: {fileID: 4342678857669002044}
+  Collider: {fileID: 127757361}
 --- !u!114 &127757362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,22 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e63a70240780bc43aaead7d398d99a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &127757361
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033335155592097369}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.15, y: 0}
-  m_Size: {x: 0.65, y: 0.2}
-  m_Direction: 1
 --- !u!50 &4342678857669002044
 Rigidbody2D:
   serializedVersion: 4
@@ -97,6 +83,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &127757361
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4033335155592097369}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.15, y: 0}
+  m_Size: {x: 0.65, y: 0.2}
+  m_Direction: 1
 --- !u!1 &4033335155953208757
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,15 +1,24 @@
-using System;
 using _Source.Code.UI;
 using Kuhpik;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace _Source.Code.Systems
 {
     public class PlayerMovementSystem : GameSystemWithScreen<GameScreen>
     {
         [SerializeField] private Vector2 airplaneVelocity;
-        
+
+        public override void OnStateEnter()
+        {
+            game.Airplane.RB.bodyType = RigidbodyType2D.Kinematic;
+            game.Airplane.RB.velocity=Vector2.zero;
+            game.Airplane.RB.angularVelocity = 0;
+            game.Airplane.Collider.enabled = true;
+
+            game.Airplane.transform.rotation = Quaternion.Euler(Vector3.zero);
+            game.Airplane.transform.position = new Vector3(-1.5f, -4f, 0f);
+        }
+
         public override void OnUpdate()
         {
             if (screen.MovementTopButton.IsPressed)

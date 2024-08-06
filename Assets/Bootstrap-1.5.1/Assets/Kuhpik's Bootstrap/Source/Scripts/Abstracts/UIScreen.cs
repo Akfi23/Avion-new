@@ -34,6 +34,8 @@ namespace Kuhpik
             }
 
             screen.SetActive(true);
+            
+            Debug.Log(statesToOpenWith[0]);
         }
 
         public virtual void Close()

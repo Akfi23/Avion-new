@@ -23,11 +23,25 @@ namespace _Source.Code.Systems
             screen.RepairButton.onClick.AddListener(BuyRepair);
         }
 
+        public override void OnStateEnter()
+        {
+            screen.RadarButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
+            screen.BodyButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
+            screen.RepairButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
+        }
+
+        public override void OnStateExit()
+        {
+            screen.RadarButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
+            screen.BodyButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
+            screen.RepairButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
+        }
+
         private void UpdateButtonStatus()
         {
-            screen.RadarButton.interactable = !player.HaveRadar;
-            screen.BodyButton.interactable = !player.HaveBody;
-            screen.RepairButton.interactable = player.Health < 3;
+            screen.RadarButton.interactable = !player.HaveRadar  && RadarPrice <= player.Money;
+            screen.BodyButton.interactable = !player.HaveBody && BodyPrice <= player.Money;
+            screen.RepairButton.interactable = player.Health < 3 && RepairPriceMultiplier * player.Distance <= player.Money;
             
             UpdatePriceInfo();
         }
@@ -36,7 +50,7 @@ namespace _Source.Code.Systems
         {
             screen.RadarPrice.SetText(RadarPrice.ToString());
             screen.BodyPrice.SetText(BodyPrice.ToString());
-            screen.RepairPrice.SetText(Mathf.RoundToInt(RepairPriceMultiplier * player.Distance * player.Money).ToString());
+            screen.RepairPrice.SetText(Mathf.RoundToInt(RepairPriceMultiplier * player.Distance).ToString());
         }
 
         private void BuyRadar()
@@ -45,6 +59,8 @@ namespace _Source.Code.Systems
 
             player.Money -= RadarPrice;
             player.HaveRadar = true;
+            
+            UpdateButtonStatus();
         }
 
         private void BuyBody()
@@ -53,6 +69,8 @@ namespace _Source.Code.Systems
             
             player.Money -= BodyPrice;
             player.HaveBody = true;
+            
+            UpdateButtonStatus();
         }
 
         private void BuyRepair()
@@ -63,6 +81,8 @@ namespace _Source.Code.Systems
 
             player.Money -= price;
             player.Health = 3;
+            
+            UpdateButtonStatus();
         }
 
         private void OnGamePhaseChange(GamePhase phase)

@@ -14,6 +14,13 @@ namespace _Source.Code.Systems
             Supyrb.Signals.Get<OnTriggerExit2DSignal>().AddListener(ChangeGameState);
         }
 
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+
+            game.CurrentPhase = GamePhase.SafeZone;
+        }
+
         private void ChangeGameState(Transform parent, Transform other)
         {
             if(!other.TryGetComponent(out ZoneBorderComponent zoneBorder)) return;

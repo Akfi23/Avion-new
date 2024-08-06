@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,11 @@ namespace _Source.Code.UI
         }
 
         public void OnPointerUp(PointerEventData eventData)
+        {
+            _isPressed = false;
+        }
+
+        public void OnDisable()
         {
             _isPressed = false;
         }
