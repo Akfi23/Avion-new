@@ -16,7 +16,7 @@ namespace _Source.Code.Systems
             game.Airplane.Collider.enabled = true;
 
             game.Airplane.transform.rotation = Quaternion.Euler(Vector3.zero);
-            game.Airplane.transform.position = new Vector3(-1.5f, -4f, 0f);
+            game.Airplane.transform.position = new Vector3(-1.5f, -2.5f, 0f);
         }
 
         public override void OnUpdate()
@@ -29,7 +29,7 @@ namespace _Source.Code.Systems
 
             if (screen.MovementDownButton.IsPressed)
             {
-                if(game.Airplane.transform.position.y +(Time.deltaTime * -airplaneVelocity.y) <-4 ) return;
+                if(game.Airplane.transform.position.y +(Time.deltaTime * -airplaneVelocity.y) <-2.5f ) return;
 
                 game.Airplane.transform.Translate(Vector2.up * Time.deltaTime * -airplaneVelocity.y);
             }
