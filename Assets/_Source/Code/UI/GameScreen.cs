@@ -1,4 +1,6 @@
-﻿using Kuhpik;
+﻿using DG.Tweening;
+using Kuhpik;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,6 +47,12 @@ namespace _Source.Code.UI
 
         [Space(40)] 
         public Image Alimiter;
+        public TMP_Text Info;
+
+        [Space(40)]
+        public Image TutorialPanel;
+        public TMP_Text TutorailText;
+        public Button ContinueTutorialButton;
         
         public override void Subscribe()
         {

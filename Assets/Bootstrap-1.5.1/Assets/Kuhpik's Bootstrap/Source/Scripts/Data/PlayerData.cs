@@ -19,5 +19,7 @@ namespace Kuhpik
         public bool HaveRadar;
         public bool HaveBody;
         public int HitToSkipBody;
+
+        public int TutorialStep;
     }
 }

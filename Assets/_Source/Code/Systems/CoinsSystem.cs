@@ -1,3 +1,4 @@
+using _Source.Code.Signals;
 using _Source.Code.UI;
 using DG.Tweening;
 using Kuhpik;
@@ -25,9 +26,13 @@ namespace _Source.Code.Systems
                 player.Money += obstacle.CoinsPerEarn;
                 obstacle.EarnObstacle();
                 
+                if(player.TutorialStep==1)
+                    Supyrb.Signals.Get<OnTutorialStepEarnSignal>().Dispatch();
+                
                 if(DOTween.IsTweening(screen.CoinsCounterText.transform)) continue;
                 
                 screen.CoinsCounterText.transform.DOPunchScale(Vector3.one * 0.05f, 0.15f).SetEase(Ease.OutFlash);
+                
             }
             
             screen.CoinsCounterText.SetText(player.Money.ToString() + " $");

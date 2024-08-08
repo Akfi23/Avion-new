@@ -1,10 +1,12 @@
 using _Source.Code.Signals;
+using _Source.Code.UI;
+using DG.Tweening;
 using Kuhpik;
 using UnityEngine;
 
 namespace _Source.Code.Systems
 {
-    public class GamePhaseSystem : GameSystem
+    public class GamePhaseSystem : GameSystemWithScreen<GameScreen>
     {
         private OnGamePhaseChangeSignal _gamePhaseChangeSignal;
         
@@ -27,6 +29,8 @@ namespace _Source.Code.Systems
             
             game.CurrentPhase = game.Airplane.transform.position.y > other.transform.position.y
                 ? GamePhase.MainGame : GamePhase.SafeZone;
+            
+            screen.Info.rectTransform.DOAnchorPosX(game.CurrentPhase== GamePhase.MainGame ? -1250:55, 1f);
             
             Debug.Log("PHASE " + game.CurrentPhase);
             _gamePhaseChangeSignal.Dispatch(game.CurrentPhase);

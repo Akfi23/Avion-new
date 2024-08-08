@@ -20,10 +20,13 @@ namespace _Source.Code.Systems
         public override void OnInit()
         {
             Supyrb.Signals.Get<OnGamePhaseChangeSignal>().AddListener(OnGamePhaseChange);
+            Supyrb.Signals.Get<OnTutorialStepEarnSignal>().AddListener(SpawnCloudForTutorial);
         }
 
         public override void OnUpdate()
         {
+            if(player.TutorialStep<4) return;
+            
             if(game.CurrentPhase==GamePhase.SafeZone) return;
 
             _timer -= Time.deltaTime;
@@ -93,6 +96,18 @@ namespace _Source.Code.Systems
             {
                 _timer = Random.Range(0.25f,1f);
             }
+        }
+
+        private void SpawnCloudForTutorial()
+        {
+            _obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
+                new Vector3(12, spawnBounds[Random.Range(0, spawnBounds.Length)], 0),Quaternion.identity);
+                
+            game.Obstacles.Add(_obstacle);
+                
+            game.Obstacles[^1].SetSprite(cloudSprites[Random.Range(0,cloudSprites.Length)]);
+            
+            game.Obstacles[^1].MakeDamagable();
         }
     }
 }

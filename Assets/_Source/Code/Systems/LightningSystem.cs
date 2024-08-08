@@ -31,6 +31,7 @@ namespace _Source.Code.Systems
 
         public override void OnUpdate()
         {
+            if(player.TutorialStep<4) return;
             if(game.CurrentPhase != GamePhase.MainGame) return;
             if(!_isRun) return;
             

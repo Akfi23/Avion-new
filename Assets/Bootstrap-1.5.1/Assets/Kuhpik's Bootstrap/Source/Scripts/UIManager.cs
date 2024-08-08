@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace Kuhpik
@@ -10,6 +12,17 @@ namespace Kuhpik
         static Dictionary<Type, UIScreen> uiScreensByType;
         static UIScreen[] uiScreens;
 
+        public TMP_FontAsset font;
+
+        [Button]
+        public void ChangeFonts()
+        {
+            foreach (var text in GetComponentsInChildren<TMP_Text>())
+            {
+                text.font = font;
+            }
+        }
+        
         void Start()
         {
             uiScreens = FindObjectsOfType<UIScreen>();
