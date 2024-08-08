@@ -3535,6 +3535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceMultiplier: 4.5
   xpPerDistance: 1
+  mileStone: 100
 --- !u!1 &891376889
 GameObject:
   m_ObjectHideFlags: 0
