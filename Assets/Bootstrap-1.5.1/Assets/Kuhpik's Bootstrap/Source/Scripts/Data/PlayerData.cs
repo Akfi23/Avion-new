@@ -18,5 +18,6 @@ namespace Kuhpik
         public float Distance;
         public bool HaveRadar;
         public bool HaveBody;
+        public int HitToSkipBody;
     }
 }

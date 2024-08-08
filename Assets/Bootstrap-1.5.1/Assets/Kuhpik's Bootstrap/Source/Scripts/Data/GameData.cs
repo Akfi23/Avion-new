@@ -16,6 +16,11 @@ namespace Kuhpik
         
         public GamePhase CurrentPhase = GamePhase.SafeZone;
         public AirplaneComponent Airplane;
+        public LightningComponent Lightning;
         public List<ObstacleComponent> Obstacles = new List<ObstacleComponent>();
+
+        public int CoinsPerRound;
+        public float XPPerRound;
+        public float DistancePerRound;
     }
 }

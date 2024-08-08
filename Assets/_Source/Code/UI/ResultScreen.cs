@@ -10,6 +10,10 @@ namespace _Source.Code.UI
         public Image Panel;
         public Button ContinueButton;
         public TMP_Text LoseText;
+        
+        public TMP_Text DistanceText;
+        public TMP_Text XPText;
+        public TMP_Text CoinsText;
 
         public override void Subscribe()
         {
@@ -17,23 +21,6 @@ namespace _Source.Code.UI
             {
                 Bootstrap.Instance.ChangeGameState(GameStateID.Game);
             });
-        }
-
-        public override void Open()
-        {
-            base.Open();
-
-            Panel.DOFade(0.7f, 1f).SetDelay(1.5f).OnComplete(() => { ContinueButton.gameObject.SetActive(true); });
-            LoseText.DOFade(1, 1f).SetDelay(1.5f);
-        }
-
-        public override void Close()
-        {
-            base.Close();
-
-            Panel.DOFade(0, 0.05f);
-            LoseText.DOFade(0, 0.05f);
-            ContinueButton.gameObject.SetActive(false);
         }
     }
 }

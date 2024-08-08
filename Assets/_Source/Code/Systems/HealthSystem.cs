@@ -19,7 +19,7 @@ namespace _Source.Code.Systems
 
         public override void OnStateEnter()
         {
-            screen.HPCounterText.SetText(player.Health.ToString() + " HP");
+            screen.SetHearts(player.Health);
         }
 
         public override void OnStateExit()
@@ -34,12 +34,31 @@ namespace _Source.Code.Systems
             if(obstacle.IsEarned) return;
             if(player.Health<1) return;
             if(obstacle.Type == ObstacleType.Cloud) return;
-            if(obstacle.Type == ObstacleType.Lightning && player.HaveBody) return;
+
+            if (obstacle.Type == ObstacleType.Lightning)
+            {
+                if (player.HaveBody)
+                {
+                    player.HitToSkipBody--;
+
+                    screen.BodyCount.SetText(player.HitToSkipBody.ToString());
+
+                    if (player.HitToSkipBody < 1)
+                    {
+                        player.HaveBody = false;
+                        screen.BodyBoosterIcon.gameObject.SetActive(false);
+                    }
+                    
+                    return;
+                }
+            }
+            
+            obstacle.ShowDamagableCloud();
             
             player.Health--;
             
-            screen.HPCounterText.SetText(player.Health.ToString() + " HP");
-            screen.HPCounterText.transform.DOPunchScale(Vector3.one * 0.15f, 0.1f).SetEase(Ease.OutCubic);
+            screen.SetHearts(player.Health);
+            screen.HPPanel.transform.DOPunchScale(Vector3.one * 0.15f, 0.1f).SetEase(Ease.OutCubic);
             
             _damageSignal.Dispatch();
 

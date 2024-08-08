@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b82eeae4d156547b5c2f9057edbf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsPerEarn: 0
-  xpPerEarn: 0
+  coinsPerEarn: 10
   isEarned: 1
+  type: 0
+  spriteRenderer: {fileID: 1261211042536797380}
+  damageColor: {r: 0.85882354, g: 0.4509804, b: 0.4509804, a: 1}
 --- !u!58 &5183960672291313112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -108,7 +110,7 @@ GameObject:
   - component: {fileID: 1261211042536797435}
   - component: {fileID: 1261211042536797380}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,8 +125,8 @@ Transform:
   m_GameObject: {fileID: 1261211042536797381}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1261211042345030904}
   m_RootOrder: 0
@@ -170,8 +172,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 62a76c52cdeb446bd8d1e50e4880bc4c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

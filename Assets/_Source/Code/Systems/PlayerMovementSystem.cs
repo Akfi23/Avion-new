@@ -6,7 +6,8 @@ namespace _Source.Code.Systems
 {
     public class PlayerMovementSystem : GameSystemWithScreen<GameScreen>
     {
-        [SerializeField] private Vector2 airplaneVelocity;
+        [SerializeField] private float airplaneVelocity;
+        public float yPos;
 
         public override void OnStateEnter()
         {
@@ -23,16 +24,33 @@ namespace _Source.Code.Systems
         {
             if (screen.MovementTopButton.IsPressed)
             {
-                if(game.Airplane.transform.position.y +(Time.deltaTime * airplaneVelocity.y) >10 ) return;
-                game.Airplane.transform.Translate(Vector2.up * Time.deltaTime * airplaneVelocity.y);
+                if(game.Airplane.transform.position.y +(Time.deltaTime * airplaneVelocity) >10 ) return;
+                game.Airplane.transform.Translate(Vector2.up * Time.deltaTime * airplaneVelocity);
             }
 
             if (screen.MovementDownButton.IsPressed)
             {
-                if(game.Airplane.transform.position.y +(Time.deltaTime * -airplaneVelocity.y) <-2.5f ) return;
+                if(game.Airplane.transform.position.y +(Time.deltaTime * -airplaneVelocity) <-2.5f ) return;
 
-                game.Airplane.transform.Translate(Vector2.up * Time.deltaTime * -airplaneVelocity.y);
+                game.Airplane.transform.Translate(Vector2.up * Time.deltaTime * -airplaneVelocity);
             }
+            
+            if (game.Airplane.transform.position.y < 5)
+            {
+                yPos = (game.Airplane.transform.position.y - (-2.5f)) / (10 - (-2.5f));
+                yPos /= 2f;
+            }
+            else
+            {
+                yPos = (0.3f + (game.Airplane.transform.position.y - 5) / (10 - 5) * (1 - 0.3f));
+            }
+            
+            screen.Alimiter.rectTransform.anchoredPosition = new Vector2(0, DenormalizeAlimiterPos());
+        }
+
+        private float DenormalizeAlimiterPos()
+        {
+            return Mathf.Clamp01(yPos) * 600 - 300;
         }
     }
 }

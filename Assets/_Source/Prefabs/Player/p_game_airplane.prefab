@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RB: {fileID: 4342678857669002044}
   Collider: {fileID: 127757361}
+  SpriteRenderer: {fileID: 4033335155953208755}
 --- !u!114 &127757362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ GameObject:
   - component: {fileID: 4033335155953208756}
   - component: {fileID: 4033335155953208755}
   m_Layer: 0
-  m_Name: Isometric Diamond
+  m_Name: airplane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,8 +126,8 @@ Transform:
   m_GameObject: {fileID: 4033335155953208757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4033335156024749090}
   m_RootOrder: 0
@@ -172,8 +173,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 1, g: 0.19115883, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a7063db85e2ad4b90a66fd608943c5dc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

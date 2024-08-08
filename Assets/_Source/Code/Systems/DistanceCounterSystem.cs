@@ -29,6 +29,9 @@ namespace _Source.Code.Systems
             screen.DistanceCounterText.SetText(player.Distance.ToString("0.00") + " Miles");
             
             _tempDistance += Time.deltaTime * distanceMultiplier;
+
+            game.XPPerRound = player.XP;
+            game.DistancePerRound = player.Distance;
             
             if(_tempDistance<100) return;
 
@@ -45,11 +48,11 @@ namespace _Source.Code.Systems
         {
             if (game.CurrentPhase == GamePhase.MainGame)
             {
-                screen.DistanceCounterText.transform.DOScale(Vector3.one * 1.5f, 0.25f).SetEase(Ease.OutFlash);
+                screen.DistancePanel.transform.DOScale(Vector3.one , 0.25f).SetEase(Ease.OutFlash);
             }
             else
             {
-                screen.DistanceCounterText.transform.DOScale(Vector3.one , 0.25f).SetEase(Ease.InFlash);
+                screen.DistancePanel.transform.DOScale(Vector3.one * 0.5f , 0.25f).SetEase(Ease.InFlash);
             }
         }
     }

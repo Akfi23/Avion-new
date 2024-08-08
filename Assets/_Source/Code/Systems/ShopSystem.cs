@@ -1,3 +1,4 @@
+using System;
 using _Source.Code.Signals;
 using _Source.Code.UI;
 using DG.Tweening;
@@ -12,7 +13,12 @@ namespace _Source.Code.Systems
         public int RadarPrice;
         public int BodyPrice;
         public float RepairPriceMultiplier;
-        
+
+        public void OnApplicationFocus(bool hasFocus)
+        {
+            Bootstrap.Instance.SaveGame();
+        }
+
         public override void OnInit()
         {
             Supyrb.Signals.Get<OnGamePhaseChangeSignal>().AddListener(OnGamePhaseChange);
@@ -28,6 +34,15 @@ namespace _Source.Code.Systems
             screen.RadarButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
             screen.BodyButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
             screen.RepairButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
+            
+            UpdateBoosterIcons();
+        }
+
+        private void UpdateBoosterIcons()
+        {
+            screen.BodyBoosterIcon.gameObject.SetActive(player.HaveBody);
+            screen.RadarBoosterIcon.gameObject.SetActive(player.HaveRadar);
+            screen.RepairBoosterIcon.gameObject.SetActive(player.Health >= 3);
         }
 
         public override void OnStateExit()
@@ -44,10 +59,14 @@ namespace _Source.Code.Systems
             screen.RepairButton.interactable = player.Health < 3 && RepairPriceMultiplier * player.Distance <= player.Money;
             
             UpdatePriceInfo();
+            
+            UpdateBoosterIcons();
         }
 
         private void UpdatePriceInfo()
         {
+            screen.CoinsCounterText.SetText(player.Money.ToString() + " $");
+
             screen.RadarPrice.SetText(RadarPrice.ToString());
             screen.BodyPrice.SetText(BodyPrice.ToString());
             screen.RepairPrice.SetText(Mathf.RoundToInt(RepairPriceMultiplier * player.Distance).ToString());
@@ -69,6 +88,9 @@ namespace _Source.Code.Systems
             
             player.Money -= BodyPrice;
             player.HaveBody = true;
+            player.HitToSkipBody = 2;
+            
+            screen.BodyCount.SetText(player.HitToSkipBody.ToString());
             
             UpdateButtonStatus();
         }
@@ -89,16 +111,12 @@ namespace _Source.Code.Systems
         {
             if (game.CurrentPhase == GamePhase.MainGame)
             {
-                screen.RadarButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
-                screen.BodyButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
-                screen.RepairButton.image.rectTransform.DOAnchorPosX(-300, 0.5f).SetEase(Ease.InFlash);
+                screen.ShopButton.image.rectTransform.DOAnchorPosY(300, 0.5f).SetEase(Ease.InFlash);
             }
             else
             {
-                screen.RadarButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
-                screen.BodyButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
-                screen.RepairButton.image.rectTransform.DOAnchorPosX(20, 0.5f).SetEase(Ease.OutFlash);
-                
+                screen.ShopButton.image.rectTransform.DOAnchorPosY(-43, 0.5f).SetEase(Ease.OutFlash);
+
                 UpdateButtonStatus();
             }
         }

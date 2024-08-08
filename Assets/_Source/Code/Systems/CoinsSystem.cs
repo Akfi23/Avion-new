@@ -31,6 +31,7 @@ namespace _Source.Code.Systems
             }
             
             screen.CoinsCounterText.SetText(player.Money.ToString() + " $");
+            game.CoinsPerRound = player.Money;
         }
     }
 }

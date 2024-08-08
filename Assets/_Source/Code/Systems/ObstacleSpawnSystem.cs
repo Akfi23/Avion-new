@@ -10,6 +10,8 @@ namespace _Source.Code.Systems
         [SerializeField] private float[] spawnBounds;
         [SerializeField] private Vector2 timerBounds;
         [SerializeField] private ObstacleComponent[] obstaclePrefabs;
+        [SerializeField] private Sprite[] cloudSprites;
+        [SerializeField] private int damageCloudChance;
 
         private float _timer;
         private int _count;
@@ -33,9 +35,19 @@ namespace _Source.Code.Systems
             if (_count == 1)
             {
                 _obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
-                    new Vector3(8, spawnBounds[Random.Range(0, spawnBounds.Length)], 0),Quaternion.identity);
+                    new Vector3(12, spawnBounds[Random.Range(0, spawnBounds.Length)], 0),Quaternion.identity);
                 
                 game.Obstacles.Add(_obstacle);
+                
+                game.Obstacles[^1].SetSprite(cloudSprites[Random.Range(0,cloudSprites.Length)]);
+
+                if (Random.Range(0, 100) < damageCloudChance)
+                {
+                    game.Obstacles[^1].MakeDamagable();
+                }
+                
+                if(player.HaveRadar)
+                    game.Obstacles[^1].ShowDamagableCloud();
             }
             else
             {
@@ -56,9 +68,19 @@ namespace _Source.Code.Systems
                     }
                     
                     _obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
-                        new Vector3(8, spawnBounds[posIndex], 0),Quaternion.identity);
+                        new Vector3(12, spawnBounds[posIndex], 0),Quaternion.identity);
 
                     game.Obstacles.Add(_obstacle);
+                    
+                    game.Obstacles[^1].SetSprite(cloudSprites[Random.Range(0,cloudSprites.Length)]);
+
+                    if (Random.Range(0, 100) < damageCloudChance)
+                    {
+                        game.Obstacles[^1].MakeDamagable();
+                    }
+                    
+                    if(player.HaveRadar)
+                        game.Obstacles[^1].ShowDamagableCloud();
                 }
             }
             
