@@ -56,10 +56,7 @@ namespace _Source.Code.Systems
             else if(player.TutorialStep == 4)
             {
                 screen.ShopPanel.gameObject.SetActive(true);
-            }
-            else if(player.TutorialStep == 5)
-            {
-                
+                player.TutorialStep++;
             }
         }
     }

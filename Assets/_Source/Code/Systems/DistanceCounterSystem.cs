@@ -10,6 +10,7 @@ namespace _Source.Code.Systems
     {
         public float distanceMultiplier;
         public float xpPerDistance;
+        public float mileStone;
         
         private float _tempDistance;
         
@@ -33,7 +34,7 @@ namespace _Source.Code.Systems
             game.XPPerRound = player.XP;
             game.DistancePerRound = player.Distance;
             
-            if(_tempDistance<100) return;
+            if(_tempDistance<mileStone) return;
 
             player.XP+=xpPerDistance;
             

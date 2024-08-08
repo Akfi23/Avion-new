@@ -116,9 +116,9 @@ namespace _Source.Code.Systems
             else
             {
                 screen.ShopButton.image.rectTransform.DOAnchorPosY(-43, 0.5f).SetEase(Ease.OutFlash);
-
-                UpdateButtonStatus();
             }
+            
+            UpdateButtonStatus();
         }
     }
 }
